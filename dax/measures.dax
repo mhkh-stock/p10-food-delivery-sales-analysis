@@ -1,0 +1,61 @@
+-- P10 — Food-Delivery Sales Analysis: DAX measures.
+-- Paste into Power BI Desktop after importing data/processed/*.csv
+-- and creating the relationships in dashboard/powerbi-build-guide.md.
+-- Grain warning: delivery_fee_pkr repeats on every line of an order,
+-- so Total Delivery Fees divides by the line count per order — see the
+-- measure below. Food Sales is a clean SUM over lines.
+
+Total Food Sales = SUM(fact_order_lines[line_total_pkr])
+
+Total Delivery Fees =
+-- Fee is stored once per line but charged once per order:
+-- take the fee from one line per order (MAX is safe — it is identical
+-- on every line of the same order).
+SUMX(
+    VALUES(fact_order_lines[order_id]),
+    CALCULATE(MAX(fact_order_lines[delivery_fee_pkr]))
+)
+
+Total Revenue = [Total Food Sales] + [Total Delivery Fees]
+
+Orders = DISTINCTCOUNT(fact_order_lines[order_id])
+
+Average Order Value = DIVIDE([Total Food Sales], [Orders])
+
+Average Delivery Minutes =
+AVERAGEX(
+    VALUES(fact_order_lines[order_id]),
+    CALCULATE(MAX(fact_order_lines[delivery_minutes]))
+)
+
+Slow Orders % =
+-- Share of orders taking over 45 minutes.
+DIVIDE(
+    COUNTROWS(
+        FILTER(
+            VALUES(fact_order_lines[order_id]),
+            CALCULATE(MAX(fact_order_lines[delivery_minutes])) > 45
+        )
+    ),
+    [Orders]
+)
+
+Food Sales Share % =
+DIVIDE([Total Food Sales], CALCULATE([Total Food Sales], ALL(dim_item)))
+
+Top Item Sales =
+-- Sales of the single best-selling item in the current filter context.
+MAXX(
+    TOPN(1, VALUES(dim_item[item]), [Total Food Sales], DESC),
+    [Total Food Sales]
+)
+
+MoM Food Sales Growth % =
+VAR CurrentMonth = [Total Food Sales]
+VAR PrevMonth =
+    CALCULATE(
+        [Total Food Sales],
+        PREVIOUSMONTH(dim_date[date_id])
+    )
+RETURN
+    DIVIDE(CurrentMonth - PrevMonth, PrevMonth)

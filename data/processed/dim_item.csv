@@ -1,0 +1,25 @@
+item_id,item,category,unit_price_pkr
+1,Chicken Biryani,Biryani,350
+2,Beef Biryani,Biryani,450
+3,Sindhi Biryani,Biryani,400
+4,Veg Biryani,Biryani,280
+5,Chicken Tikka,BBQ & Grill,420
+6,Seekh Kabab (4 pc),BBQ & Grill,480
+7,Malai Boti,BBQ & Grill,550
+8,Beef Kabab,BBQ & Grill,520
+9,Zinger Burger,Fast Food,450
+10,Beef Burger,Fast Food,520
+11,Chicken Shawarma,Fast Food,300
+12,Fries (Large),Fast Food,250
+13,Chicken Karahi (half),Desi Curries,850
+14,Daal Fry,Desi Curries,280
+15,Palak Paneer,Desi Curries,420
+16,Nihari,Desi Curries,650
+17,Mint Margarita,Beverages,200
+18,Sweet Lassi,Beverages,180
+19,Soft Drink,Beverages,120
+20,Green Tea,Beverages,150
+21,Gulab Jamun (2 pc),Desserts,150
+22,Kheer,Desserts,180
+23,Rasmalai,Desserts,220
+24,Brownie,Desserts,250
