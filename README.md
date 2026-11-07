@@ -1,5 +1,7 @@
 # P10 — Food-Delivery Sales Analysis: restaurant orders → Power BI dashboard + best-sellers report
 
+**Repo:** https://github.com/mhkh-stock/p10-food-delivery-sales-analysis
+
 **Restaurant:** Lahore Food Co (fictional) · **Period:** Jul–Sep 2026 (Q3) · **Status: SAMPLE delivery on DEMO data**
 **Tools:** Power BI (DAX) · SQL star schema (SQLite) · Python (pandas + reportlab)
 **Model:** `data/model.db` + `data/processed/*.csv` (Power BI-ready) · **Measures:** `dax/measures.dax`
