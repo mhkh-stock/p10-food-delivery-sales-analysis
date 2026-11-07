@@ -15,6 +15,12 @@ the README) — this guide plus the model and DAX below produce it.
 | `dim_item.csv` | dim_item |
 | `dim_date.csv` | dim_date |
 
+In Power Query, check that `dim_date[date_id]` is typed as **Date**
+(it usually auto-detects from the `YYYY-MM-DD` text). The
+`MoM Food Sales Growth %` measure uses `PREVIOUSMONTH`, which needs a
+real date column — if `date_id` stays text, that one measure errors
+while everything else still works.
+
 ## 2. Relationships (3 min, Model view)
 
 | From | To | Cardinality | Cross-filter |
@@ -35,7 +41,7 @@ Food Sales Share % · Top Item Sales · MoM Food Sales Growth %.
 
 ⚠️ **Read the comment on Total Delivery Fees before changing it:**
 the fee repeats on every line of an order, so a plain `SUM` would
-count it 1.83× too high. The measure takes the fee once per order.
+count it 1.63× too high on this data. The measure takes the fee once per order.
 The same applies to Average Delivery Minutes and Slow Orders % —
 delivery time is an order-level fact.
 

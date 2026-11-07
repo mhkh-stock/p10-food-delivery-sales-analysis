@@ -49,6 +49,42 @@ report a restaurant owner can act on without opening Power BI.
 | `src/build_report.py` | Recomputes every KPI from the CSV and builds the PDF + charts |
 | `src/checks.py` | Data-quality checks as code — 25 checks, all passing |
 
+## Model (star schema)
+
+One row per order line; delivery fee and delivery minutes are
+order-level facts repeated on each line of the order, so order-level
+totals must use `DISTINCT order_id`, never a plain `SUM` over lines.
+
+```mermaid
+erDiagram
+    fact_order_lines }|--|| dim_item : item_id
+    fact_order_lines }|--|| dim_date : date_id
+    fact_order_lines {
+        string order_id
+        string date_id
+        int order_hour
+        string area
+        string channel
+        string payment_method
+        int item_id
+        int quantity
+        int line_total_pkr
+        int delivery_fee_pkr
+        int delivery_minutes
+    }
+    dim_item {
+        int item_id
+        string item
+        string category
+        int unit_price_pkr
+    }
+    dim_date {
+        string date_id
+        string month
+        string weekday
+    }
+```
+
 ## 3 key findings (from the demo data)
 
 1. **Karahi is the profit engine, Biryani is the volume engine.**
@@ -58,7 +94,7 @@ report a restaurant owner can act on without opening Power BI.
    slot and Biryani earns the "most ordered" badge.
 2. **Two peaks carry two-thirds of the business.** Lunch 13:00–15:00
    (550 orders, 30.6%) and dinner 19:00–22:00 (595 orders, 33.1%)
-   together are 63.7% of orders. *So what:* rider and kitchen staffing
+   together are 63.6% of orders. *So what:* rider and kitchen staffing
    is a peak-hours problem, not an all-day problem.
 3. **Delivery is the weak link, and it is geographic.** Average
    delivery 32.6 minutes, but 151 orders (8.4%) took over 45 minutes;
@@ -89,6 +125,22 @@ quantity × price, the delivery-fee rule (PKR 0 iff food ≥ 1,500),
 and the SQLite model agreeing with the CSV row for row. The PDF was
 reopened and read back: 2 pages, top-10 table + category table +
 charts + 5 actions all present.
+
+## Limits
+
+- **Sample data only.** One fictional restaurant, one quarter
+  (Jul–Sep 2026), 6 Lahore areas, 3 channels, 24 menu items. No
+  customer-level data, no real prices, no real restaurant.
+- **No `.pbix` bundled.** Power BI Desktop (Windows) is required to
+  author the finished dashboard from the model + DAX + build guide
+  (see the honest note at the top).
+- **The delivery-fee rule is the sample's rule** (PKR 80 per order,
+  free when food ≥ PKR 1,500). A real restaurant's fee rule will
+  differ — change it in `src/build_model.py` and re-run.
+- **Ratings are partial:** only 1,268 of 1,800 orders (70%) carry a
+  rating; the 4.31 average is over rated orders only.
+- **Three months, no seasonality claim.** August is the best month
+  of this quarter; nothing here proves a yearly pattern.
 
 ## How to run it (under 5 steps)
 

@@ -2,8 +2,9 @@
 -- Paste into Power BI Desktop after importing data/processed/*.csv
 -- and creating the relationships in dashboard/powerbi-build-guide.md.
 -- Grain warning: delivery_fee_pkr repeats on every line of an order,
--- so Total Delivery Fees divides by the line count per order — see the
--- measure below. Food Sales is a clean SUM over lines.
+-- so a plain SUM would over-count it — the measure below takes the fee
+-- once per order (MAX is safe: the fee is identical on every line of
+-- the same order). Food Sales is a clean SUM over lines.
 
 Total Food Sales = SUM(fact_order_lines[line_total_pkr])
 

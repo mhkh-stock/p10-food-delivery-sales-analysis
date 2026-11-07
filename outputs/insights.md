@@ -10,11 +10,11 @@
    for different reasons.
 2. **Two peaks carry two-thirds of the business.** Lunch 13:00–15:00
    is 550 orders (30.6%) and dinner 19:00–22:00 is 595 orders (33.1%)
-   — 63.7% of all orders land in 7 hours of the day. August is the
+   — 63.6% of all orders land in 7 hours of the day. August is the
    best month (PKR 569,970 food sales, 651 orders) against July's
    PKR 505,470. *So what:* rider and kitchen staffing is a peak-hours
    problem, not an all-day problem; a shortfall at 20:00 costs roughly
-   three times a shortfall at 10:00.
+   twice a shortfall at 10:00 (148 orders vs 79).
 3. **Delivery is the weak link, and it is geographic.** Average
    delivery is 32.6 minutes, but 151 orders (8.4%) took over 45
    minutes, and the gap is area, not food: Johar Town averages 39.3

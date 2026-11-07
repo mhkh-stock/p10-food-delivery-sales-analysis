@@ -173,7 +173,7 @@ actions = [
     "add a PKR 150 dessert to Karahi and Biryani combos instead of "
     "discounting the main dish.",
     "3. Staff the 13:00–15:00 and 19:00–22:00 peaks first — "
-    "two-thirds of orders land in those 7 hours; a rider shortfall "
+    "almost two-thirds of orders land in those 7 hours; a rider shortfall "
     "there costs more than anywhere else.",
     "4. Fix Johar Town delivery: longest average delivery and the "
     "slowest area by a clear margin — check rider allocation there "
@@ -194,6 +194,8 @@ story.append(Paragraph(
     "screenshots — the Power BI build guide is in "
     "dashboard/powerbi-build-guide.md.", styles["Normal"]))
 SimpleDocTemplate(str(PDF), pagesize=A4,
+                  title="Lahore Food Co — Best Sellers & Sales Report (SAMPLE)",
+                  author="Muhammad Hashir",
                   topMargin=1.6 * cm, bottomMargin=1.6 * cm).build(story)
 print(f"orders: {N_ORDERS}, food sales PKR {FOOD_SALES:,}, "
       f"total PKR {TOTAL:,}")

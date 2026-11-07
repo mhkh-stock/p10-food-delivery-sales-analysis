@@ -28,6 +28,6 @@ order export, not from order placement.
 **Proof this service works:** this repo's sample — fictional Lahore
 Food Co, 1,800 orders over Q3 2026, PKR 1,712,880 total revenue,
 Chicken Karahi the top seller (PKR 195,500), lunch + dinner peaks
-carrying 63.7% of orders, Johar Town the slowest delivery area
+carrying 63.6% of orders, Johar Town the slowest delivery area
 (39.3 min vs Gulberg 26.8), 25 automated checks passing. The sample
 report is the demo the buyer sees before ordering.
